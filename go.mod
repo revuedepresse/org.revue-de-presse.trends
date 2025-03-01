@@ -48,6 +48,6 @@ require (
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20201210142538-e3217bee35cc // indirect
 	google.golang.org/grpc v1.34.0 // indirect
-	google.golang.org/protobuf v1.30.0 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 	inet.af/netaddr v0.0.0-20220617031823-097006376321 // indirect
 )
