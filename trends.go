@@ -12,13 +12,10 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	_ "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	"gopkg.in/DataDog/dd-trace-go.v1/profiler"
 	"gopkg.in/zabawaba99/firego.v1"
 	"io/ioutil"
 	"log"
 	_ "math"
-	"net"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -138,41 +135,6 @@ func main() {
 
 	err, configuration := parseConfiguration()
 	handleError(err)
-
-	if configuration.Env == "prod" {
-		addr := net.JoinHostPort(
-			configuration.AgentHost,
-			configuration.AgentPort,
-		)
-
-		tracer.Start(
-			tracer.WithAgentAddr(addr),
-			tracer.WithDebugMode(true),
-			tracer.WithDebugStack(true),
-			tracer.WithEnv(configuration.Env),
-			tracer.WithLogStartup(true),
-			tracer.WithRuntimeMetrics(),
-			tracer.WithService(configuration.Service),
-			tracer.WithServiceVersion(configuration.ServiceVersion),
-			tracer.WithTraceEnabled(true),
-		)
-		defer tracer.Stop()
-
-		err := profiler.Start(
-			profiler.WithEnv(configuration.Env),
-			profiler.WithProfileTypes(
-				profiler.CPUProfile,
-				profiler.HeapProfile,
-			),
-			profiler.WithService(configuration.Service),
-			profiler.WithVersion(configuration.ServiceVersion),
-		)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer profiler.Stop()
-	}
 
 	db := connectToDatabase(configuration)
 

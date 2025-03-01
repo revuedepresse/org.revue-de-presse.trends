@@ -1,5 +1,8 @@
 # trends.revue-de-presse.org
 
+Since we're migrating away from Firebase,  
+this project is no longer maintained.
+
 ## Documentation
 
 ```

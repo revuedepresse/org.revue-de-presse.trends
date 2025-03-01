@@ -1,11 +1,11 @@
-version: '3.8'
-
 services:
 
   app:
     build:
       context:    '../../'
       dockerfile: './provisioning/containers/worker/Dockerfile'
+      platforms:
+        - linux/x86_64
     env_file:
       - '../../.env'
     restart:      'always'
@@ -17,6 +17,8 @@ services:
     build:
       context:    '../../'
       dockerfile: './provisioning/containers/worker/Dockerfile'
+      platforms:
+        - linux/x86_64
     env_file:
       - '../../.env'
     restart:      'always'
