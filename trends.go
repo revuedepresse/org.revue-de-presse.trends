@@ -16,7 +16,6 @@ import (
 	"io/ioutil"
 	"log"
 	_ "math"
-	"net"
 	"os"
 	"path/filepath"
 	"strconv"
